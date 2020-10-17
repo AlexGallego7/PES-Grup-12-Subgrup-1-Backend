@@ -25,3 +25,12 @@ heroku login
 Si afegim algun mòdul, fer:
 pip freeze > requirements.txt
 
+Passos per a fer commit:
+git add .
+git commit -m "..."
+git push
+
+Si volem que es provi a heroku
+git push heroku master
+
+
