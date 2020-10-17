@@ -22,3 +22,6 @@ curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
 Login a heroku:
 heroku login
 
+Si afegim algun mòdul, fer:
+pip freeze > requirements.txt
+
