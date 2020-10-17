@@ -13,11 +13,12 @@ alexandre.gracia@estudiantat.upc.edu
 Per a que flask detecti la app com a principal:
 export FLASK_APP=app
 
-Per a instalar heroku:
+Per a entrar a venv:
+source venv/bin/activate
 
+Per a instalar heroku:
 curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
 
 Login a heroku:
-
 heroku login
 
