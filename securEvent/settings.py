@@ -12,10 +12,10 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import django_heroku
+from mongoengine import connect
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -26,8 +26,7 @@ SECRET_KEY = 'wgytmjv9o+pu0)1#0pbi9ri)-bt4oqyv)l_*i_osnzxc25$40+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -39,7 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myapi.apps.MyapiConfig',
+    'tutorials.apps.TutorialsConfig',
     'rest_framework',
+    'corsheaders'
+
 ]
 
 MIDDLEWARE = [
@@ -50,7 +52,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'securEvent.urls'
 
@@ -78,11 +84,31 @@ django_heroku.settings(locals())
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'djongo',
+        "CLIENT": {
+            "name": "securEvent_sqlite",
+            "host": "mongodb+srv://securEventUser:OvVhhHZZj1ZGwbs1@securevent.toifh.mongodb.net/securEvent_sqlite?retryWrites=true&w=majority",
+            "username": "securEventUser",
+            "password": "OvVhhHZZj1ZGwbs1",
+            "authMechanism": "SCRAM-SHA-1",
+        },
+    },
+    'secureEvent': {
+        'ENGINE': 'djongo',
+        "CLIENT": {
+            "name": "securEvent",
+            "host": "mongodb+srv://securEventUser:OvVhhHZZj1ZGwbs1@securevent.toifh.mongodb.net/securEvent?retryWrites=true&w=majority",
+            "username": "securEventUser>",
+            "password": "OvVhhHZZj1ZGwbs1",
+            "authMechanism": "SCRAM-SHA-1",
+        },
+    },
 }
 
+MONGO_DATABASE = 'securEvent'
+MONGO_PORT = 27017
+
+connect(MONGO_DATABASE, host='mongodb+srv://securEventUser:OvVhhHZZj1ZGwbs1@securevent.toifh.mongodb.net/securEvent?retryWrites=true&w=majority', port=27017)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -102,7 +128,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -115,7 +140,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
