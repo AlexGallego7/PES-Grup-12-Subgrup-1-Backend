@@ -1,4 +1,0 @@
-
-https://stackabuse.com/deploying-a-flask-application-to-heroku/
-
-export FLASK_APP=hello

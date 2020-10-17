@@ -8,11 +8,16 @@ marc.soler.colomer@estudiantat.upc.edu
 alejandro.gallego.rodriguez@estudiantat.upc.edu
 kamal.el.hachmi@estudiantat.upc.edu
 miquel.perello.rodriguez@estudiantat.upc.edu
-alexandre.gracia@estudiantat.upc.edu    
+alexandre.gracia@estudiantat.upc.edu
+
+Per a que flask detecti la app com a principal:
+export FLASK_APP=app
 
 Per a instalar heroku:
 
 curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
 
-Per a que flask detecti la app com a principal:
-export FLASK_APP=app
+Login a heroku:
+
+heroku login
+
