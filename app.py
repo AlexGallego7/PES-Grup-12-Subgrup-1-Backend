@@ -44,7 +44,7 @@ def post_something():
 # A welcome message to test our server
 @app.route('/')
 def index():
-    return "<h1>Alex Catalan wapi <3  !!</h1><h3> Funciona?  😓</h3>"
+    return "<h1>Alex Catalan wapi <3  !!</h1><h3> Funciona?   😓</h3>"
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
