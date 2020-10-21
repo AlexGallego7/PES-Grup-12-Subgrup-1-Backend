@@ -30,9 +30,6 @@ jobs:
       - name: Run migrations
         run: python manage.py migrate
         
-      - name: Run tests
-        run: py.test
-        
       - name: Deploy
         run: python manage.py runserver
         
