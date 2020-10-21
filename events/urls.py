@@ -4,5 +4,6 @@ from django.urls.conf import path
 from . import views
 
 urlpatterns = (
-    url(r'^$', views.TutorialsView.as_view()),
+    url(r'^$', views.EventsView.as_view()),
+    path('<name>', views.EventView.as_view()),
 )

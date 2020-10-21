@@ -37,8 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'myapi.apps.MyapiConfig',
-    'tutorials.apps.TutorialsConfig',
     'rest_framework',
     'corsheaders'
 

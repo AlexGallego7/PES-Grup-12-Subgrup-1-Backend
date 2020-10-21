@@ -22,7 +22,4 @@ source env/bin/activate
 On Windows:
 .\env\Scripts\activate
 ### Cómo arrancar el server
-En Linux:
 python manage.py runserver
-En windows:
-py manage.py runserver
