@@ -1,4 +1,4 @@
-##SecurEvent
+## SecurEvent
 ### Make events great again
 Correos:
 aleix.vila.berenguel@estudiantat.upc.edu
@@ -11,12 +11,12 @@ miquel.perello.rodriguez@estudiantat.upc.edu
 
 jordi.piguillem@upc.edu
 silverio.martinez@upc.edu
-###Cómo creat entorno virtual
+### Cómo creat entorno virtual
 On macOS and Linux:
 python3 -m venv env
 On Windows:
 py -m venv env
-###Cómo acceder al entorno virtual
+### Cómo acceder al entorno virtual
 On macOS and Linux:
 source env/bin/activate
 On Windows:
