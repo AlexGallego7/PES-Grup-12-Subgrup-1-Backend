@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import django_heroku
 from mongoengine import connect
+from secret import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,10 +22,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'wgytmjv9o+pu0)1#0pbi9ri)-bt4oqyv)l_*i_osnzxc25$40+'
-
+SECRET_KEY = SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = DEBUG
 
 ALLOWED_HOSTS = ['*']
 
@@ -85,9 +85,9 @@ DATABASES = {
         'ENGINE': 'djongo',
         "CLIENT": {
             "name": "securEvent_sqlite",
-            "host": "mongodb+srv://securEventUser:OvVhhHZZj1ZGwbs1@securevent.toifh.mongodb.net/securEvent_sqlite?retryWrites=true&w=majority",
+            "host": MONGO_SRV,
             "username": "securEventUser",
-            "password": "OvVhhHZZj1ZGwbs1",
+            "password": MONGO_ATLAS_PWD,
             "authMechanism": "SCRAM-SHA-1",
         },
     },
@@ -95,9 +95,9 @@ DATABASES = {
         'ENGINE': 'djongo',
         "CLIENT": {
             "name": "securEvent",
-            "host": "mongodb+srv://securEventUser:OvVhhHZZj1ZGwbs1@securevent.toifh.mongodb.net/securEvent?retryWrites=true&w=majority",
+            "host": MONGO_SRV,
             "username": "securEventUser>",
-            "password": "OvVhhHZZj1ZGwbs1",
+            "password": MONGO_ATLAS_PWD,
             "authMechanism": "SCRAM-SHA-1",
         },
     },
@@ -106,7 +106,7 @@ DATABASES = {
 MONGO_DATABASE = 'securEvent'
 MONGO_PORT = 27017
 
-connect(MONGO_DATABASE, host='mongodb+srv://securEventUser:OvVhhHZZj1ZGwbs1@securevent.toifh.mongodb.net/securEvent?retryWrites=true&w=majority', port=27017)
+connect(MONGO_DATABASE, host=MONGO_SRV, port=27017)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

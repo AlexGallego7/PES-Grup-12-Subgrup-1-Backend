@@ -10,3 +10,4 @@ class EventsSerializer(serializers.DocumentSerializer):
     class Meta:
         model = Events
         fields = "__all__"
+

@@ -8,11 +8,13 @@ from events.serializers import EventsSerializer
 
 class EventsView(APIView):
 
-    def get(self, request):
+    @staticmethod
+    def get(request):
         serializer = EventsSerializer(Events.objects.all(), many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         serializer = EventsSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
