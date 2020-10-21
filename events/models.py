@@ -9,7 +9,7 @@ class Events(Document):
     date = fields.StringField(required=True)
     hourIni = fields.StringField(required=True)
     hourEnd = fields.StringField(required=True)
-    prize = fields.FloatField(required=True)
+    price_range = fields.StringField(required=True)
     measures = fields.StringField(required=False, null=True)
     ratings = fields.IntField(required=False, null=True, max_value=5, min_value=0)
     link = fields.StringField(required=False, null=True)
