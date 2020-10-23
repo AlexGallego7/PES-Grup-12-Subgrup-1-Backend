@@ -10,21 +10,27 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 import django_heroku
 from mongoengine import connect
-from secret import *
+import dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
+# Add .env variables anywhere before SECRET_KEY
+
+dotenv_file = os.path.join(BASE_DIR, ".env")
+if os.path.isfile(dotenv_file):
+    dotenv.load_dotenv(dotenv_file)
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = SECRET_KEY
+SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = DEBUG
+DEBUG = os.environ['DEBUG']
 
 ALLOWED_HOSTS = ['*']
 
@@ -85,9 +91,9 @@ DATABASES = {
         'ENGINE': 'djongo',
         "CLIENT": {
             "name": "securEvent_sqlite",
-            "host": MONGO_SRV,
+            "host": os.environ['MONGO_SRV'],
             "username": "securEventUser",
-            "password": MONGO_ATLAS_PWD,
+            "password": os.environ['MONGO_ATLAS_PWD'],
             "authMechanism": "SCRAM-SHA-1",
         },
     },
@@ -95,9 +101,9 @@ DATABASES = {
         'ENGINE': 'djongo',
         "CLIENT": {
             "name": "securEvent",
-            "host": MONGO_SRV,
+            "host": os.environ['MONGO_SRV'],
             "username": "securEventUser>",
-            "password": MONGO_ATLAS_PWD,
+            "password": os.environ['MONGO_ATLAS_PWD'],
             "authMechanism": "SCRAM-SHA-1",
         },
     },
@@ -106,7 +112,7 @@ DATABASES = {
 MONGO_DATABASE = 'securEvent'
 MONGO_PORT = 27017
 
-connect(MONGO_DATABASE, host=MONGO_SRV, port=27017)
+connect(MONGO_DATABASE, host=os.environ['MONGO_SRV'], port=27017)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
