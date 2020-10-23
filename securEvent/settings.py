@@ -102,7 +102,7 @@ DATABASES = {
         "CLIENT": {
             "name": "securEvent",
             "host": os.environ['MONGO_SRV'],
-            "username": "securEventUser>",
+            "username": "securEventUser",
             "password": os.environ['MONGO_ATLAS_PWD'],
             "authMechanism": "SCRAM-SHA-1",
         },
@@ -111,8 +111,9 @@ DATABASES = {
 
 MONGO_DATABASE = 'securEvent'
 MONGO_PORT = 27017
+MONGO_HOST = os.environ['MONGO_SRV']
 
-connect(MONGO_DATABASE, host=os.environ['MONGO_SRV'], port=27017)
+connect(MONGO_DATABASE, host=MONGO_HOST, port=27017)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
