@@ -108,7 +108,7 @@ DATABASES = {
 
 MONGO_DATABASE = 'securEvent'
 
-connect(MONGO_DATABASE, host='mongodb+srv://securEventUser:' + os.environ.get('MONGO_ATLAS_PWD') + '@securevent.toifh.mongodb.net/securEvent?retryWrites=true&w=majority')
+connect(MONGO_DATABASE, host=os.environ.get('MONGODB_URI'))
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
