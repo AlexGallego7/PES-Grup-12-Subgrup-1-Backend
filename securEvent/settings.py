@@ -111,7 +111,7 @@ MONGO_DATABASE = 'securEvent'
 MONGO_PORT = 27017
 MONGO_HOST = os.environ['MONGO_SRV']
 
-connect(MONGO_DATABASE, host=MONGO_HOST, port=27017)
+connect(MONGO_DATABASE, host=MONGO_HOST, port=MONGO_PORT)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
