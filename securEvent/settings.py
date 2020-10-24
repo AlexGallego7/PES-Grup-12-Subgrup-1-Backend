@@ -108,9 +108,8 @@ DATABASES = {
 }
 
 MONGO_DATABASE = 'securEvent'
-MONGO_HOST = os.environ['MONGODB_URI']
 
-connect(MONGO_DATABASE, host=MONGO_HOST)
+connect(MONGO_DATABASE, host=os.environ['MONGODB_URI'])
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
