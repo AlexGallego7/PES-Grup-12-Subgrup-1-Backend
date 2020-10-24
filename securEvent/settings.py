@@ -13,11 +13,10 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 import django_heroku
-import pymongo
 from mongoengine import connect
-import environ
+from dotenv import load_dotenv
+load_dotenv()
 
-environ.Env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -27,9 +26,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['SECRET_KEY']
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ['DEBUG']
+SECRET_KEY = os.environ.get('SECRET_KEY') # SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = os.environ.get('DEBUG')
 
 ALLOWED_HOSTS = ['*']
 
@@ -90,9 +88,9 @@ DATABASES = {
         'ENGINE': 'djongo',
         "CLIENT": {
             "name": "securEvent_sqlite",
-            "host": os.environ['MONGODB_URI'],
+            "host": os.environ.get('MONGODB_URI'),
             "username": "securEventUser",
-            "password": os.environ['MONGO_ATLAS_PWD'],
+            "password": os.environ.get('MONGO_ATLAS_PWD'),
             "authMechanism": "SCRAM-SHA-1",
         },
     },
@@ -100,19 +98,17 @@ DATABASES = {
         'ENGINE': 'djongo',
         "CLIENT": {
             "name": "securEvent",
-            "host": os.environ['MONGODB_URI'],
+            "host": os.environ.get('MONGODB_URI'),
             "username": "securEventUser",
-            "password": os.environ['MONGO_ATLAS_PWD'],
+            "password": os.environ.get('MONGO_ATLAS_PWD'),
             "authMechanism": "SCRAM-SHA-1",
         },
     },
 }
 
 MONGO_DATABASE = 'securEvent'
-url = os.environ['MONGODB_URI']
-client = pymongo.MongoClient(url)
 
-#connect(MONGO_DATABASE, host=os.environ['MONGODB_URI'])
+connect(MONGO_DATABASE, host=os.environ.get('MONGODB_URI'))
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
