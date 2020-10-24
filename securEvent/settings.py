@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 import django_heroku
+import pymongo
 from mongoengine import connect
 import environ
 
@@ -108,8 +109,10 @@ DATABASES = {
 }
 
 MONGO_DATABASE = 'securEvent'
+url = os.environ['MONGODB_URI']
+client = pymongo.MongoClient(url)
 
-connect(MONGO_DATABASE, host=os.environ['MONGODB_URI'])
+#connect(MONGO_DATABASE, host=os.environ['MONGODB_URI'])
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
