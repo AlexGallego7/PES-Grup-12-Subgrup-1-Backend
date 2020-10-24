@@ -87,7 +87,7 @@ DATABASES = {
         'ENGINE': 'djongo',
         "CLIENT": {
             "name": "securEvent_sqlite",
-            "host": os.environ.get('MONGODB_URI'),
+            "host": os.environ.get('MONGODB_URI_SQLITE'),
             "username": "securEventUser",
             "password": os.environ.get('MONGO_ATLAS_PWD'),
             "authMechanism": "SCRAM-SHA-1",
