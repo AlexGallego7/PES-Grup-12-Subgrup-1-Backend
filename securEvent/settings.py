@@ -89,7 +89,7 @@ DATABASES = {
         'ENGINE': 'djongo',
         "CLIENT": {
             "name": "securEvent_sqlite",
-            "host": os.environ['MONGO_SRV'],
+            "host": os.environ['MONGODB_URI'],
             "username": "securEventUser",
             "password": os.environ['MONGO_ATLAS_PWD'],
             "authMechanism": "SCRAM-SHA-1",
@@ -99,7 +99,7 @@ DATABASES = {
         'ENGINE': 'djongo',
         "CLIENT": {
             "name": "securEvent",
-            "host": os.environ['MONGO_SRV'],
+            "host": os.environ['MONGODB_URI'],
             "username": "securEventUser",
             "password": os.environ['MONGO_ATLAS_PWD'],
             "authMechanism": "SCRAM-SHA-1",
@@ -108,10 +108,9 @@ DATABASES = {
 }
 
 MONGO_DATABASE = 'securEvent'
-MONGO_PORT = 27017
-MONGO_HOST = os.environ['MONGO_SRV']
+MONGO_HOST = os.environ['MONGODB_URI']
 
-connect(MONGO_DATABASE, host=MONGO_HOST, port=MONGO_PORT)
+connect(MONGO_DATABASE, host=MONGO_HOST)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
