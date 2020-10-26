@@ -87,9 +87,9 @@ DATABASES = {
         'ENGINE': 'djongo',
         "CLIENT": {
             "name": "securEvent_sqlite",
-            "host": 'mongodb+srv://securEventUser:Yise6p2j2YV6FqT0@securevent.toifh.mongodb.net/securEvent_sqlite?retryWrites=true&w=majority',
+            "host": os.environ.get('MONGODB_URI_SQLITE'),
             "username": "securEventUser",
-            "password": 'Yise6p2j2YV6FqT0',
+            "password": os.environ.get('MONGO_ATLAS_PWD'),
             "authMechanism": "SCRAM-SHA-1",
         },
     },
@@ -97,9 +97,9 @@ DATABASES = {
         'ENGINE': 'djongo',
         "CLIENT": {
             "name": "securEvent",
-            "host": 'mongodb+srv://securEventUser:Yise6p2j2YV6FqT0@securevent.toifh.mongodb.net/securEvent?retryWrites=true&w=majority',
+            "host": os.environ.get('MONGODB_URI'),
             "username": "securEventUser",
-            "password": 'Yise6p2j2YV6FqT0',
+            "password": os.environ.get('MONGO_ATLAS_PWD'),
             "authMechanism": "SCRAM-SHA-1",
         },
     },
@@ -107,7 +107,7 @@ DATABASES = {
 
 MONGO_DATABASE = 'securEvent'
 
-connect(MONGO_DATABASE, host='mongodb+srv://securEventUser:Yise6p2j2YV6FqT0@securevent.toifh.mongodb.net/securEvent?retryWrites=true&w=majority')
+connect(MONGO_DATABASE, host=os.environ.get('MONGODB_URI'))
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
