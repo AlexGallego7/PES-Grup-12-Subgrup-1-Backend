@@ -40,10 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'accounts',
     'rest_framework',
     'corsheaders',
     'drf_yasg'
 ]
+
+AUTH_USER_MODEL = 'accounts.MyUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -94,7 +97,7 @@ DATABASES = {
             "authMechanism": "SCRAM-SHA-1",
         },
     },
-    'secureEvent': {
+    'securEvent': {
         'ENGINE': 'djongo',
         "CLIENT": {
             "name": "securEvent",

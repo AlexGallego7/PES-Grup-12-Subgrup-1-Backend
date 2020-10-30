@@ -30,6 +30,18 @@ class EventView(APIView):
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
+    def put(self, request, *args, **kwargs):
+        event_id = self.kwargs['id']
+        try:
+            event = Events.objects.get(_id=event_id)
+        except Events.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        serializer = EventsSerializer(event, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(status=status.HTTP_200_OK)
+
     def delete(self, request, *args, **kwargs):
         event_id = self.kwargs['id']
         try:
