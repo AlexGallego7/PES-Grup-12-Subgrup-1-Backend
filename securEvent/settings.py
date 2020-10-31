@@ -42,11 +42,21 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'rest_framework',
+    'knox',
     'corsheaders',
     'drf_yasg'
 ]
 
 AUTH_USER_MODEL = 'accounts.MyUser'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'knox.auth.TokenAuthentication',
+    ),
+    'DATETIME_FORMAT': "%m/%d/%Y %H:%M:%S",
+}
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
