@@ -39,4 +39,9 @@ class ManagersView(APIView):
 
 
 class ManagerView(APIView):
-    pass
+
+    def get(self, request, *args, **kwargs):
+        username = self.kwargs['username']
+        serializer = ManagersSerializer(Managers.objects.filter(username=username), many=True)
+
+        return Response(data=serializer.data, status=status.HTTP_200_OK)

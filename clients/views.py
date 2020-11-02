@@ -40,4 +40,9 @@ class ClientsView(APIView):
 
 
 class ClientView(APIView):
-    pass
+
+    def get(self, request, *args, **kwargs):
+        username = self.kwargs['username']
+        serializer = ClientSerializer(Clients.objects.filter(username=username), many=True)
+
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
