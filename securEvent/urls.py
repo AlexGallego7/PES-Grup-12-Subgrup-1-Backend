@@ -41,7 +41,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('accounts.urls')),
 
+    url(r'^clients/?', include('clients.urls')),
     url(r'^events/?', include('events.urls')),
     url(r'^measures/?', include('measures.urls')),
+    url(r'^managers/?', include('managers.urls')),
     url(r'^reservations/?', include('reservations.urls')),
 ]

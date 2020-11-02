@@ -5,6 +5,7 @@ from rest_framework import serializers
 
 MyUser._meta.get_field('email')._unique = True
 
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = MyUser
