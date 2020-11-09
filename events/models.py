@@ -15,5 +15,5 @@ class Events(Document):
     ratings = fields.IntField(required=False, null=True, max_value=5, min_value=0)
     link = fields.StringField(required=False, null=True)
     id_manager = fields.IntField(required=False)
-    room = fields.StringField(required=True)
+    id_room = fields.StringField(required=True)
 
