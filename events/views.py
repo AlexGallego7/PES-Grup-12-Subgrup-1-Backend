@@ -8,9 +8,6 @@ from events.serializers import EventsSerializer
 
 
 class EventsView(APIView):
-    permission_classes = [
-        permissions.IsAuthenticated,
-    ]
 
     @staticmethod
     def get(request):
