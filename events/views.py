@@ -12,7 +12,7 @@ class EventsView(APIView):
     @staticmethod
     def get(request):
         if request.user.id is not None and request.user.is_manager:
-            serializer = EventsSerializer(Events.objects.filter(id_manager=request.user.id, many=True))
+            serializer = EventsSerializer(Events.objects.filter(id_manager=request.user.id), many=True)
             return Response(data=serializer.data, status=status.HTTP_200_OK)
         else:
             serializer = EventsSerializer(Events.objects.all(), many=True)
