@@ -1,5 +1,5 @@
 from django.core.exceptions import ObjectDoesNotExist
-from rest_framework import status
+from rest_framework import status, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -8,11 +8,18 @@ from events.serializers import EventsSerializer
 
 
 class EventsView(APIView):
+    permission_classes = [
+        permissions.IsAuthenticated,
+    ]
 
     @staticmethod
     def get(request):
-        serializer = EventsSerializer(Events.objects.all(), many=True)
-        return Response(data=serializer.data, status=status.HTTP_200_OK)
+        if request.user.is_manager:
+            serializer = EventsSerializer(Events.objects.filter(id_manager=request.user.id, many=True))
+            return Response(data=serializer.data, status=status.HTTP_200_OK)
+        else:
+            serializer = EventsSerializer(Events.objects.all(), many=True)
+            return Response(data=serializer.data, status=status.HTTP_200_OK)
 
     @staticmethod
     def post(request):
