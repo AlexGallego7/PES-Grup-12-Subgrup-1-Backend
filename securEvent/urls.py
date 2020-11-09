@@ -46,4 +46,5 @@ urlpatterns = [
     url(r'^measures/?', include('measures.urls')),
     url(r'^managers/?', include('managers.urls')),
     url(r'^reservations/?', include('reservations.urls')),
+    url(r'^rooms/?', include('rooms.urls')),
 ]
