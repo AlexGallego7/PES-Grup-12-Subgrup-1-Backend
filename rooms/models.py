@@ -3,6 +3,7 @@ from mongoengine import Document, fields
 
 
 class Rooms(Document):
+    _id = fields.StringField(primary_key=True, disabled=False)
     name = fields.StringField(required=True, max_length=50)
     id_manager = fields.IntField(required=False)
     street = fields.StringField(required=True)
