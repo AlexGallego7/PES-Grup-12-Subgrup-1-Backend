@@ -16,7 +16,7 @@ class UserCreationForm(forms.ModelForm):
 
     class Meta:
         model = MyUser
-        fields = ('username',)
+        fields = "__all__"
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -86,3 +86,6 @@ admin.site.register(MyUser, UserAdmin)
 # ... and, since we're not using Django's built-in permissions,
 # unregister the Group model from admin.
 admin.site.unregister(Group)
+admin.site.index_title = 'Accounts administration'
+admin.site.site_url = "https://securevent.herokuapp.com"
+admin.site.site_header = 'SecurEvent'
