@@ -41,6 +41,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('accounts.urls')),
 
+    url(r'^applies/?', include('applies.urls')),
     url(r'^clients/?', include('clients.urls')),
     url(r'^events/?', include('events.urls')),
     url(r'^measures/?', include('measures.urls')),
