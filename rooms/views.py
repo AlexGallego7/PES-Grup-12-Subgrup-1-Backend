@@ -25,15 +25,15 @@ class RoomsView(APIView):
 class RoomView(APIView):
 
     def get(self, request, *args, **kwargs):
-        room_name = self.kwargs['name']
-        serializer = RoomsSerializer(Rooms.objects.filter(name=room_name), many=True)
+        room_id = self.kwargs['id']
+        serializer = RoomsSerializer(Rooms.objects.filter(_id=room_id), many=True)
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
     def put(self, request, *args, **kwargs):
-        room_name = self.kwargs['name']
+        room_id = self.kwargs['id']
         try:
-            room = Rooms.objects.get(name=room_name)
+            room = Rooms.objects.get(_id=room_id)
         except Rooms.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -43,9 +43,9 @@ class RoomView(APIView):
         return Response(status=status.HTTP_200_OK)
 
     def delete(self, request, *args, **kwargs):
-        room_name = self.kwargs['name']
+        room_id = self.kwargs['id']
         try:
-            Rooms.objects.get(name=room_name).delete()
+            Rooms.objects.get(_id=room_id).delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         except Rooms.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
