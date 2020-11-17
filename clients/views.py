@@ -30,7 +30,7 @@ class ClientsView(APIView):
         client = {
             "_id": user.data["id"],
             "username": user.data["username"],
-            "age": request.data["age"],
+            "age": request.data.get('age', None),
             "country": request.data.get('country', None)}
 
         serializer = ClientSerializer(data=client)
