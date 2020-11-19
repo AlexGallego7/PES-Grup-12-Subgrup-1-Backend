@@ -16,6 +16,8 @@ class ReservationsView(APIView):
 
     @staticmethod
     def post(request):
+        request.data['_id'] = request.data['id_event'] + "_" + str(request.user.id)
+        request.data['id_user'] = request.user.id
         serializer = ReservationsSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()

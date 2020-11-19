@@ -1,4 +1,8 @@
-from rest_framework import status
+from functools import reduce
+from operator import or_
+
+from mongoengine import Q
+from rest_framework import status, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -6,6 +10,10 @@ from accounts.models import MyUser
 from accounts.serializers import RegisterSerializer
 from clients.models import Clients
 from clients.serializers import ClientSerializer
+from events.models import Events
+from events.serializers import EventsSerializer
+from reservations.models import Reservations
+from reservations.serializers import ReservationsSerializer
 
 
 class ClientsView(APIView):
@@ -45,4 +53,21 @@ class ClientView(APIView):
         username = self.kwargs['username']
         serializer = ClientSerializer(Clients.objects.filter(username=username), many=True)
 
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+
+class AgendaView(APIView):
+
+    @staticmethod
+    def get(request):
+        print(request.user.id)
+        serializer = ReservationsSerializer(Reservations.objects.filter(id_user=request.user.id), many=True)
+        print(serializer.data)
+        reservations = []
+        for i in range(len(serializer.data)):
+            reservations.append(serializer.data[i]['id_event'])
+
+        print(reservations)
+
+        serializer = EventsSerializer(Events.objects.filter(reduce(or_, [Q(_id=c) for c in reservations])), many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
