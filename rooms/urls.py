@@ -6,4 +6,5 @@ from . import views
 urlpatterns = (
     url(r'^$', views.RoomsView.as_view()),
     path('<id>', views.RoomView.as_view()),
+    path('<id>/events', views.RoomEvents.as_view()),
 )

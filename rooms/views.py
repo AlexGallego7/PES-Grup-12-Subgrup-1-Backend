@@ -3,6 +3,8 @@ from rest_framework import status, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from events.models import Events
+from events.serializers import EventsSerializer
 from rooms.models import Rooms
 from rooms.serializers import RoomsSerializer
 
@@ -49,3 +51,12 @@ class RoomView(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
         except Rooms.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+class RoomEvents(APIView):
+
+    def get(self, request,  *args, **kwargs):
+        id_room = self.kwargs['id']
+        events = EventsSerializer(Events.objects.filter(id_room=id_room), many=True)
+
+        return Response(data=events.data, status=status.HTTP_200_OK)
