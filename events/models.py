@@ -14,6 +14,7 @@ class Events(Document):
     measures = fields.ListField(required=False)
     ratings = fields.IntField(required=False, null=True, max_value=5, min_value=0)
     link = fields.StringField(required=False, null=True)
+    seats = fields.StringField(required=False)
     id_manager = fields.IntField(required=False)
     id_room = fields.StringField(required=True)
 
