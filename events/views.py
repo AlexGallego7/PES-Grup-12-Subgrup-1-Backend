@@ -1,7 +1,3 @@
-import base64
-import pickle
-
-import numpy
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import status, permissions
 from rest_framework.response import Response
@@ -9,23 +5,7 @@ from rest_framework.views import APIView
 
 from events.models import Events
 from events.serializers import EventsSerializer
-from rooms.models import Rooms
-from itertools import chain
-
-
-def create_matrix(id_room):
-    sala = Rooms.objects.get(_id=id_room)
-    matrix = [['T'] * sala.columns] * sala.rows
-    matrix = '\n'.join('\t'.join(x for x in y) for y in matrix)
-    return matrix
-
-
-def string_to_matrix(string):
-    prematrix = string.split('\n')
-    matrix = []
-    for i in prematrix:
-        matrix.append(i.split('\t'))
-    return matrix
+from utils.functions import create_matrix, string_to_matrix, matrix_to_string
 
 
 class EventsView(APIView):
@@ -41,7 +21,7 @@ class EventsView(APIView):
 
     @staticmethod
     def post(request):
-        request.data['seats'] = create_matrix(request.data["id_room"])
+        request.data['seats'] = matrix_to_string(create_matrix(request.data["id_room"]))
         serializer = EventsSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
