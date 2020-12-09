@@ -59,7 +59,6 @@ def seat_assign(event_id, user_id, n):
     # PROUS LLOCS LLIURES I GENERAR MATRIU
     seients = []
     reserves = int(n)
-    print(event.seats.count('T'))
     if event.seats.count('T') < reserves:
         return seients
     matrix = string_to_matrix(event.seats)
@@ -93,13 +92,22 @@ def seat_assign(event_id, user_id, n):
                 else:  # NO HI CABEN TOTES LES RESERVES A LA MATEIXA FILA
                     skip_row = True
 
-    # c_matrix = numpy.array(matrix)
-    # index = numpy.where(c_matrix == 'T')
-    # print(index)
-    # seient1 = str(index[0][0]) + "-" + str(index[1][0])
-    # seient2 = str(index[0][1]) + "-" + str(index[1][1])
-    # seient3 = str(index[0][2]) + "-" + str(index[1][2])
-    # print(seient1)
-    # print(seient2)
-    # print(seient3)
+    # NO S'HA POGUT ASSIGNAR SEIENTS JUNTS, ASIGNAR SEPARATS
+    c_matrix = numpy.array(matrix)
+    available = numpy.where(c_matrix == 'T')
+    y = 0
+    while len(seients) != reserves:
+        matrix[available[0][y]][available[1][y]] = str(user_id)
+        seients.append(str(available[0][y]) + "-" + str(available[1][y]))
+        # INVALIDAR SEIENTS COVID VERTICALS
+        if available[0][y] + 1 < room.rows:
+            matrix[available[0][y] + 1][available[1][y]] = 'F'
+        # INVALIDAR SEIENT(s) COVID HORITZONTALS, si som l'últim de la reserva
+        if y == reserves - 1:
+            for f in range(offset):
+                if available[1][y] + f + 1 < room.columns:
+                    matrix[available[0][y]][available[1][y] + f + 1] = 'F'
+        y += 1
+
+    save_matrix(event_id, matrix)
     return seients
