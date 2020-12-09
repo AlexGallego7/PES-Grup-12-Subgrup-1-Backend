@@ -42,7 +42,7 @@ def save_matrix(event_id, matrix):
 
 
 def enough_space(matrix, i, j, reserves, llocs):
-    if reserves >= llocs:
+    if reserves > llocs:
         return False
     else:
         for seats in range(reserves):
@@ -59,6 +59,7 @@ def seat_assign(event_id, user_id, n):
     # PROUS LLOCS LLIURES I GENERAR MATRIU
     seients = []
     reserves = int(n)
+    print(event.seats.count('T'))
     if event.seats.count('T') < reserves:
         return seients
     matrix = string_to_matrix(event.seats)
