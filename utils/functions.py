@@ -61,6 +61,7 @@ def seat_assign(event_id, user_id, n):
                     if j + f + 1 < room.columns:
                         matrix[i][j + f + 1] = 'F'
                 # INVALIDAR SEIENT COVID VERTICAL
-                matrix[i + 1][j] = 'F'
+                if i + 1 < room.rows:
+                    matrix[i + 1][j] = 'F'
                 save_matrix(event_id, matrix)
                 return seients
