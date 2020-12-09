@@ -24,10 +24,9 @@ def string_to_matrix(string):
 
 def get_offset(distance_between_seats, seats_size):
     offset = 0
-    if distance_between_seats >= 1.5:
-        return offset
-    offset += 1
-    while distance_between_seats * 2 * offset + seats_size < 1.5:
+    distance = distance_between_seats
+    while distance < 1.5:
+        distance += seats_size + distance_between_seats
         offset += 1
     return offset
 
