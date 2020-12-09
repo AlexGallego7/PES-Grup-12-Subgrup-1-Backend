@@ -17,13 +17,21 @@ class ReservationsView(APIView):
 
     @staticmethod
     def post(request, *args, **kwargs):
+        if int(request.query_params['n']) > 4:
+            return Response({"error": "Due COVID-19 restrictions, we can not assing more than 4 seats"},
+                            status=status.HTTP_400_BAD_REQUEST)
         request.data['_id'] = request.data['id_event'] + "_" + str(request.user.id)
         request.data['id_user'] = request.user.id
-        request.data['seat_number'] = seat_assign(request.data['id_event'], request.user.id, request.query_params['n'])
-        serializer = ReservationsSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+        seients = seat_assign(request.data['id_event'], request.user.id, request.query_params['n'])
+        if len(seients) > 0:
+            request.data['seat_number'] = seients
+            serializer = ReservationsSerializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response({"error": "Can not found " + request.query_params['n'] + " available seats"},
+                            status=status.HTTP_400_BAD_REQUEST)
 
 
 class ReservationView(APIView):
