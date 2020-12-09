@@ -44,7 +44,7 @@ class EventView(APIView):
         except Events.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-        serializer = EventsSerializer(event, data=request.data, partial=True)
+        serializer = EventsSerializer(event, data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(status=status.HTTP_200_OK)
