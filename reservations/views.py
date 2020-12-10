@@ -38,9 +38,11 @@ class ReservationView(APIView):
 
     def get(self, request, *args, **kwargs):
         reservation_id = self.kwargs['id']
-        serializer = ReservationsSerializer(Reservations.objects.filter(_id=reservation_id), many=True)
-
-        return Response(data=serializer.data, status=status.HTTP_200_OK)
+        try:
+            reservation = ReservationsSerializer(Reservations.objects.get(_id=reservation_id))
+            return Response(data=reservation.data, status=status.HTTP_200_OK)
+        except Reservations.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
     def delete(self, request, *args, **kwargs):
         reservation_id = self.kwargs['id']

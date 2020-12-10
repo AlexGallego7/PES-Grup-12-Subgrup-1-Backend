@@ -71,3 +71,4 @@ class AgendaView(APIView):
 
         serializer = EventsSerializer(Events.objects.filter(reduce(or_, [Q(_id=c) for c in reservations])), many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
+
