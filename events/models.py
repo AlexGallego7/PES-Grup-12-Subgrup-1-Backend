@@ -5,7 +5,7 @@ from mongoengine import Document, fields
 class Events(Document):
     _id = fields.StringField(primary_key=True, disabled=False)
     name = fields.StringField(required=True, max_length=50)
-    logo = fields.URLField(required=False)
+    logo = fields.StringField(required=False, null=True)
     date = fields.StringField(required=True)
     hourIni = fields.StringField(required=True)
     hourEnd = fields.StringField(required=True)
