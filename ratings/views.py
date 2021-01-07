@@ -33,7 +33,8 @@ class RatingsView(APIView):
             eserializer = EventsSerializer(data=event)
             eserializer.is_valid(raise_exception=True)
             if eserializer.save():
-                reservation = ReservationsSerializer(Reservations.objects.get(_id=request.data['id_event'] + "_" + str(request.user.id))).data.copy()
+                reservation = ReservationsSerializer(
+                    Reservations.objects.get(_id=request.data['id_event'] + "_" + str(request.user.id))).data.copy()
                 reservation['id_review'] = serializer.data["_id"]
                 rserializer = ReservationsSerializer(data=reservation)
                 rserializer.is_valid(raise_exception=True)
@@ -67,3 +68,11 @@ class RatingView(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(status=status.HTTP_200_OK)
+
+
+class EventRatings(APIView):
+
+    def get(self, request, *args, **kwargs):
+        serializer = RatingsSerializer(Ratings.objects.filter(id_event=self.kwargs['event']), many=True)
+
+        return Response(data=serializer.data, status=status.HTTP_200_OK)

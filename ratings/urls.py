@@ -5,5 +5,7 @@ from . import views
 
 urlpatterns = (
     url(r'^$', views.RatingsView.as_view()),
+    path('<event>', views.EventRatings.as_view()),
     path('<id>', views.RatingView.as_view()),
+
 )
